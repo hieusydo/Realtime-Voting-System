@@ -17,6 +17,12 @@ $ bin/kafka-server-start.sh config/server.properties
 $ python voting-service/producer.py
 ```
 
+## MongoDB
+```sh
+$ mongod --config /usr/local/etc/mongod.conf
+$ brew services start mongodb-community@4.0
+```
+
 ## Reference
 - https://kafka.apache.org/quickstart
 - http://spark.apache.org/docs/2.4.0/api/python/pyspark.streaming.html
