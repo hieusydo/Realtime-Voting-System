@@ -4,36 +4,49 @@
         <title>Voting System</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">  <!--shrink-to-fit=no-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     </head>
     <body>
         <div class="container">
-            <div class="row">
-                <h1>Ballot</h1>
-                <form method="POST" action="http://127.0.0.1:5000/castVote">
-                    <p><strong>Name:</strong><br>
-                    <input type="text" name="voter_name" size=40 maxlength=150>
-                    <p><strong>Voter ID:</strong><br>
-                    <input type="text" name="voter_id" size=40 maxlength=150>
-                    <p>President</p>
-                    <div>
-                        <input type="radio" name="president" value="a">A
-                        <input type="radio" name="president" value="b">B
-                        <input type="radio" name="president" value="c">C
-                        <input type="radio" name="president" value="d">D
-                    </div>
-                    <p>Vice President</p>
-                    <div>
+            <h2 class="text-center">Ballot</h2>
+            <form action="/action_page.php" class="was-validated">
+                <div class="form-group">
+                    <label for="votername"><strong>Name:</strong><br></label>
+                    <input type="text" class="form-control" id="votername" placeholder="Enter Name" name="votername" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+                <div class="form-group">
+                    <label for="voterid"><strong>Voter ID:</strong><br></label>
+                    <input type="text" class="form-control" id="voterid" placeholder="Enter Voter ID" name="voterid" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+                <div class="form-group">
+                    <p><strong>President</strong><br></p>
+                    <input type="radio" name="president" value="a">A
+                    <input type="radio" name="president" value="b">B
+                    <input type="radio" name="president" value="c">C
+                    <input type="radio" name="president" value="d">D
+                </div>
+                <div class="form-group">
+                        <p><strong>Vice President</strong><br></p>
                         <input type="radio" name="vice_president" value="a">A
                         <input type="radio" name="vice_president" value="b">B
-                        <input type="radio" name="vice_president" value="c">C
+                        <input type="radio" name="vice_presidentt" value="c">C
                         <input type="radio" name="vice_president" value="d">D
-                    </div>
-                    <input type="submit" value="Submit">
-                </form>
-            </div>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="remember" required> I agree on blabla.
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Check this checkbox to continue.</div>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
     </body>
 </html>
