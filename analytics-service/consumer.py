@@ -4,36 +4,37 @@ os.environ['PYSPARK_SUBMIT_ARGS'] = '--packages org.apache.spark:spark-streaming
 from pyspark import SparkContext
 from pyspark.streaming import StreamingContext
 from pyspark.streaming.kafka import KafkaUtils
-import json
-
+from flask import Flask, render_template, request, session, url_for, redirect
 from kafka import KafkaConsumer
 
+import json
 
-print('Running Consumer..')
+app = Flask(__name__)
 
+global VOTE
+VOTE = 0
 
-'''
-    Separate Kafka consumer
-'''
-# consumer = KafkaConsumer(topic_name, auto_offset_reset='earliest',
-#                             bootstrap_servers=['localhost:9092'], api_version=(0, 10), consumer_timeout_ms=1000)
-# for msg in consumer:
-#     v = msg.value
-#     print(v)
-# consumer.close()
+def init_stream():
+    # Integrate with Spark Streaming
+    sc = SparkContext(appName="PythonSparkStreamingKafka_RM_01")
+    sc.setLogLevel("WARN")
+    ssc = StreamingContext(sc, 5)
 
+    topic_name = 'unverified-votes'
+    kafkaStream = KafkaUtils.createStream(ssc, 'localhost:2181', 'spark-streaming', {topic_name:1})
+    parsed = kafkaStream.map(lambda v: json.loads(v[1]))
+    parsed.map(lambda x:'Vote in this batch: %s' % x).pprint()
 
-'''
-    Integrate with Spark Streaming
-'''
-sc = SparkContext(appName="PythonSparkStreamingKafka_RM_01")
-sc.setLogLevel("WARN")
-ssc = StreamingContext(sc, 5)
+    global VOTE
+    VOTE += parsed.count()
 
-topic_name = 'all-votes'
-kafkaStream = KafkaUtils.createStream(ssc, 'localhost:2181', 'spark-streaming', {topic_name:1})
-parsed = kafkaStream.map(lambda v: json.loads(v[1]))
-parsed.map(lambda x:'Vote in this batch: %s' % x).pprint()
+    ssc.start()
+    ssc.awaitTermination()
 
-ssc.start()
-ssc.awaitTermination()
+@app.route('/view')
+def draw_vote():
+    return render_template('index.html', vote=VOTE)
+
+if __name__ == "__main__":
+    init_stream()
+    app.run('127.0.0.1', 3718, debug = True)

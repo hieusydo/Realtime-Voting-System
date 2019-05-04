@@ -5,21 +5,20 @@ import json
 
 app = Flask(__name__)
 
-#Define a route to hello function
-@app.route('/')
-def hello():
-  return render_template('index.html')
-
 @app.route('/castVote', methods = ['POST'])
 def api_message():
-    if request.headers['Content-Type'] == 'application/json':
-        kafka_producer = connect_kafka_producer()
-        publish_message(kafka_producer, 'all-votes', 'vote', json.dumps(request.json))
-        if kafka_producer is not None:
-            kafka_producer.close()
-        return "JSON Message: " + json.dumps(request.json)
-    else:
-        return "415 Unsupported Media Type ;)"
+    ballot = {
+        'voter-name': request.form['voter_name'],
+        'voter-id': request.form['voter_name'],
+        'president': request.form['voter_name'],
+        'vice-president': request.form['voter_name']
+    }
+    kafka_producer = connect_kafka_producer()
+    publish_message(kafka_producer, 'unverified-votes', 'vote', json.dumps(ballot))
+    if kafka_producer is not None:
+        kafka_producer.close()
+    print('(api_message): %s' % json.dumps(ballot))
+    return redirect('http://127.0.0.1:8888/')
 
 def publish_message(producer_instance, topic_name, key, value):
     try:
