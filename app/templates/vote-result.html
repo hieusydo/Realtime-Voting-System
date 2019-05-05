@@ -1,3 +1,53 @@
-{{ pa }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Voting Results</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">  <!--shrink-to-fit=no-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Results</h1>
+        <div class="container">
+            <div class="row"><h3>President</h3></div>
+            <div class="row">
+                <div class="col-md-3"><p>George Washington</p></div>
+                <div class="col-md-3"><p>{{ pa }}</p></div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"><p>John Hancock</p></div>
+                <div class="col-md-3"><p>{{ pb }}</p></div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"><p>John Jay</p></div>
+                <div class="col-md-3"><p>{{ pc }}</p></div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"><p>George Clinton</p></div>
+                <div class="col-md-3"><p>{{ pd }}</p></div>
+            </div>
 
-{{ pb }}
+            <div class="row"><h3>Vice President</h3></div>
+            <div class="row">
+                <div class="col-md-3"><p>John Adams</p></div>
+                <div class="col-md-3"><p>{{ vpa }}</p></div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"><p>Aaron Burr</p></div>
+                <div class="col-md-3"><p>{{ vpb }}</p></div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"><p>Thomas Jefferson</p></div>
+                <div class="col-md-3"><p>{{ vpc }}</p></div>
+            </div>
+            <div class="row">
+                <div class="col-md-3"><p>Thomas Pinckney</p></div>
+                <div class="col-md-3"><p>{{ vpd }}</p></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

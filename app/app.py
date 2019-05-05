@@ -25,9 +25,7 @@ def draw_vote():
     consumer = KafkaConsumer(topic_name, bootstrap_servers=['localhost:9092'],
                             auto_offset_reset='latest', group_id='group1',
                             enable_auto_commit=True, consumer_timeout_ms=500)
-    print('HELLO:', consumer)
     for msg in consumer:
-        print('check')
         global PRES_A_CNT
         global PRES_B_CNT
         global PRES_C_CNT
@@ -39,7 +37,7 @@ def draw_vote():
         global VP_D_CNT
 
         dmsg = json.loads(msg.value)
-        print(dmsg)
+        print('draw_vote(): New aggregated votes read: %s' % dmsg)
         if 'pa' in dmsg:
             PRES_A_CNT += dmsg['pa']
         elif 'pb' in dmsg:
@@ -58,8 +56,10 @@ def draw_vote():
         elif 'vpd' in dmsg:
             VP_D_CNT += dmsg['vpd']
 
-    # consumer.close()
-    return render_template('vote-result.html', pa=PRES_A_CNT, pb=PRES_B_CNT)
+    consumer.close()
+
+    return render_template('vote-result.html', pa=PRES_A_CNT, pb=PRES_B_CNT, pc=PRES_C_CNT, pd=PRES_D_CNT,\
+                                                vpa=VP_A_CNT, vpb=VP_B_CNT, vpc=VP_C_CNT, vpd=VP_D_CNT)
 
 if __name__ == "__main__":
     app.run('127.0.0.1', 8888, debug = True)
