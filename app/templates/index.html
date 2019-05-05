@@ -11,7 +11,7 @@
     <body>
         <div class="container">
             <h2 class="text-center">Ballot</h2>
-            <form action="/action_page.php" class="was-validated">
+            <form method="POST" action="http://127.0.0.1:5000/castVote" class="was-validated">
                 <div class="form-group">
                     <label for="votername"><strong>Name:</strong><br></label>
                     <input type="text" class="form-control" id="votername" placeholder="Enter Name" name="votername" required>

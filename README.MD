@@ -14,8 +14,12 @@ $ bin/kafka-server-start.sh config/server.properties
 
 Create topics
 ```sh
-$ bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic unverified-votes
+$ bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic aggregate-votes
 ```
+
+Delete
+
+bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic aggregate-votes
 
 ## Python Server
 ```sh
@@ -25,3 +29,6 @@ $ python voting-service/producer.py
 ## Reference
 - https://kafka.apache.org/quickstart
 - http://spark.apache.org/docs/2.4.0/api/python/pyspark.streaming.html
+
+weird bug
+https://github.com/darkskyapp/forecast-ruby/issues/13
