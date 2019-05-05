@@ -9,12 +9,12 @@ app = Flask(__name__)
 def api_message():
     ballot = {
         'voter-name': request.form['voter_name'],
-        'voter-id': request.form['voter_name'],
-        'president': request.form['voter_name'],
-        'vice-president': request.form['voter_name']
+        'voter-id': request.form['voter_id'],
+        'president': request.form['president'],
+        'vice-president': request.form['vice_president']
     }
     kafka_producer = connect_kafka_producer()
-    publish_message(kafka_producer, 'unverified-votes', 'vote', json.dumps(ballot))
+    publish_message(kafka_producer, 'unverified-votes', 'uvvote', json.dumps(ballot))
     if kafka_producer is not None:
         kafka_producer.close()
     print('(api_message): %s' % json.dumps(ballot))
@@ -31,7 +31,6 @@ def publish_message(producer_instance, topic_name, key, value):
     except Exception as ex:
         print('Exception in publishing message')
         print(str(ex))
-
 
 def connect_kafka_producer():
     _producer = None
