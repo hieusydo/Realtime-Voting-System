@@ -27,9 +27,18 @@ bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic aggregate-votes
 $ python voting-service/producer.py
 ```
 
+## MongoDB
+```sh
+$ mongod --config /usr/local/etc/mongod.conf
+$ brew services start mongodb-community@4.0
+```
+
 ## Reference
 - https://kafka.apache.org/quickstart
 - http://spark.apache.org/docs/2.4.0/api/python/pyspark.streaming.html
+<<<<<<< HEAD
+=======
 
 weird bug
 https://github.com/darkskyapp/forecast-ruby/issues/13
+>>>>>>> upstream/master
