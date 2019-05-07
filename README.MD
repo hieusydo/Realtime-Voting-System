@@ -36,9 +36,10 @@ $ brew services start mongodb-community@4.0
 ## Reference
 - https://kafka.apache.org/quickstart
 - http://spark.apache.org/docs/2.4.0/api/python/pyspark.streaming.html
-<<<<<<< HEAD
-=======
 
 weird bug
 https://github.com/darkskyapp/forecast-ruby/issues/13
->>>>>>> upstream/master
+Fix:
+```sh
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+```
