@@ -1,0 +1,11 @@
+#ballotColumn {
+    padding: 0 50px;
+}
+
+#leftColumn {
+    background-color: red;
+}
+
+#rightColumn {
+    background-color: blue;
+}
