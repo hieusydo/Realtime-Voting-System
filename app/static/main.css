@@ -3,9 +3,25 @@
 }
 
 #leftColumn {
-    background-color: red;
+    background-color: #e74c3c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #rightColumn {
-    background-color: blue;
+    background-color: #2980b9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#ballotSubmitBtn {
+    margin-bottom: 10px;
+    background-color: black;
+    border-color: black;
+}
+
+.starBanner .fa {
+    color: white;
 }
