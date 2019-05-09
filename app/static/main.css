@@ -3,14 +3,14 @@
 }
 
 #leftColumn {
-    background-color: #e74c3c;
+    background-color: #f4f4f4;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 #rightColumn {
-    background-color: #2980b9;
+    background-color: #f4f4f4;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -24,4 +24,9 @@
 
 .starBanner .fa {
     color: white;
+}
+
+#headerBar {
+    height: 7px;
+    background-color: #0066ff;
 }

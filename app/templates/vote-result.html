@@ -10,11 +10,11 @@
 </head>
 <style>
     body {
-        margin: 15px;
-        background-color: #F1F3F3
+        /* margin: 15px; */
+        background-color: #f4f4f4
     }
     .bar {
-        fill: #2980b9;
+        fill: #0066ff;
     }
     .axis path,
     .axis line {
@@ -36,54 +36,58 @@
         padding: 14px;
         text-align: center;
     }
+    #headerBar {
+        height: 7px;
+        background-color: #0066ff;
+        margin-bottom: 30px;
+    }
 </style>
 <body>
+    <div class="row" id="headerBar"></div>
+    <h1 class="text-center">Results</h1>
     <div class="container">
-        <h1 class="text-center">Results</h1>
-        <div class="container">
-            <div class="row"><h3>President</h3></div>
-            <div class="row">
-                <div class="col-md-3"><p>George Washington</p></div>
-                <div class="col-md-3"><p id="pav">{{ pa }}</p></div>
-            </div>
-            <div class="row">
-                <div class="col-md-3"><p>John Hancock</p></div>
-                <div class="col-md-3"><p id="pbv">{{ pb }}</p></div>
-            </div>
-            <div class="row">
-                <div class="col-md-3"><p>John Jay</p></div>
-                <div class="col-md-3"><p id="pcv">{{ pc }}</p></div>
-            </div>
-            <div class="row">
-                <div class="col-md-3"><p>George Clinton</p></div>
-                <div class="col-md-3"><p id="pdv">{{ pd }}</p></div>
-            </div>
-            <div class="row">
-                <svg width="960" height="200" id="presidentChart"></svg>
-            </div>
+        <div class="row"><h3>President</h3></div>
+        <div class="row">
+            <div class="col-md-3"><p>George Washington</p></div>
+            <div class="col-md-3"><p id="pav">{{ pa }}</p></div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"><p>John Hancock</p></div>
+            <div class="col-md-3"><p id="pbv">{{ pb }}</p></div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"><p>John Jay</p></div>
+            <div class="col-md-3"><p id="pcv">{{ pc }}</p></div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"><p>George Clinton</p></div>
+            <div class="col-md-3"><p id="pdv">{{ pd }}</p></div>
+        </div>
+        <div class="row">
+            <svg width="960" height="200" id="presidentChart"></svg>
+        </div>
 
-            <br>
+        <br>
 
-            <div class="row"><h3>Vice President</h3></div>
-            <div class="row">
-                <div class="col-md-3"><p>John Adams</p></div>
-                <div class="col-md-3"><p id="vpav">{{ vpa }}</p></div>
-            </div>
-            <div class="row">
-                <div class="col-md-3"><p>Aaron Burr</p></div>
-                <div class="col-md-3"><p id="vpbv">{{ vpb }}</p></div>
-            </div>
-            <div class="row">
-                <div class="col-md-3"><p>Thomas Jefferson</p></div>
-                <div class="col-md-3"><p id="vpcv">{{ vpc }}</p></div>
-            </div>
-            <div class="row">
-                <div class="col-md-3"><p>Thomas Pinckney</p></div>
-                <div class="col-md-3"><p id="vpdv">{{ vpd }}</p></div>
-            </div>
-            <div class="row">
-                    <svg width="960" height="200" id="vpChart"></svg>
-                </div>
+        <div class="row"><h3>Vice President</h3></div>
+        <div class="row">
+            <div class="col-md-3"><p>John Adams</p></div>
+            <div class="col-md-3"><p id="vpav">{{ vpa }}</p></div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"><p>Aaron Burr</p></div>
+            <div class="col-md-3"><p id="vpbv">{{ vpb }}</p></div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"><p>Thomas Jefferson</p></div>
+            <div class="col-md-3"><p id="vpcv">{{ vpc }}</p></div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"><p>Thomas Pinckney</p></div>
+            <div class="col-md-3"><p id="vpdv">{{ vpd }}</p></div>
+        </div>
+        <div class="row">
+            <svg width="960" height="200" id="vpChart"></svg>
         </div>
     </div>
 </body>
@@ -114,7 +118,7 @@
     var y = d3.scaleBand().range([height, 0]);
 
     var g = svg.append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
     data.sort(function(a, b) { return a.value - b.value; });
@@ -123,30 +127,30 @@
     y.domain(data.map(function(d) { return d.area; })).padding(0.1);
 
     g.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x).ticks(5).tickFormat(function(d) { return parseInt(d); }).tickSizeInner([-height]));
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x).ticks(5).tickFormat(function(d) { return parseInt(d); }).tickSizeInner([-height]));
 
     g.append("g")
-        .attr("class", "y axis")
-        .call(d3.axisLeft(y));
+    .attr("class", "y axis")
+    .call(d3.axisLeft(y));
 
     g.selectAll(".bar")
-        .data(data)
-        .enter().append("rect")
-        .attr("class", "bar")
-        .attr("x", 0)
-        .attr("height", y.bandwidth())
-        .attr("y", function(d) { return y(d.area); })
-        .attr("width", function(d) { return x(d.value); })
-        .on("mousemove", function(d){
-            tooltip
-            .style("left", d3.event.pageX - 50 + "px")
-            .style("top", d3.event.pageY - 70 + "px")
-            .style("display", "inline-block")
-            .html((d.area) + "<br>" + (d.value) + " votes");
-        })
-        .on("mouseout", function(d){ tooltip.style("display", "none");});
+    .data(data)
+    .enter().append("rect")
+    .attr("class", "bar")
+    .attr("x", 0)
+    .attr("height", y.bandwidth())
+    .attr("y", function(d) { return y(d.area); })
+    .attr("width", function(d) { return x(d.value); })
+    .on("mousemove", function(d){
+        tooltip
+        .style("left", d3.event.pageX - 50 + "px")
+        .style("top", d3.event.pageY - 70 + "px")
+        .style("display", "inline-block")
+        .html((d.area) + "<br>" + (d.value) + " votes");
+    })
+    .on("mouseout", function(d){ tooltip.style("display", "none");});
 
 
 
@@ -175,7 +179,7 @@
     var y = d3.scaleBand().range([height, 0]);
 
     var g = vpSvg.append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
     vpData.sort(function(a, b) { return a.value - b.value; });
@@ -184,29 +188,29 @@
     y.domain(vpData.map(function(d) { return d.area; })).padding(0.1);
 
     g.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x).ticks(5).tickFormat(function(d) { return parseInt(d); }).tickSizeInner([-height]));
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x).ticks(5).tickFormat(function(d) { return parseInt(d); }).tickSizeInner([-height]));
 
     g.append("g")
-        .attr("class", "y axis")
-        .call(d3.axisLeft(y));
+    .attr("class", "y axis")
+    .call(d3.axisLeft(y));
 
     g.selectAll(".bar")
-        .data(vpData)
-        .enter().append("rect")
-        .attr("class", "bar")
-        .attr("x", 0)
-        .attr("height", y.bandwidth())
-        .attr("y", function(d) { return y(d.area); })
-        .attr("width", function(d) { return x(d.value); })
-        .on("mousemove", function(d){
-            tooltip
-            .style("left", d3.event.pageX - 50 + "px")
-            .style("top", d3.event.pageY - 70 + "px")
-            .style("display", "inline-block")
-            .html((d.area) + "<br>" + (d.value) + " votes");
-        })
-        .on("mouseout", function(d){ tooltip.style("display", "none");});
-    </script>
-    </html>
+    .data(vpData)
+    .enter().append("rect")
+    .attr("class", "bar")
+    .attr("x", 0)
+    .attr("height", y.bandwidth())
+    .attr("y", function(d) { return y(d.area); })
+    .attr("width", function(d) { return x(d.value); })
+    .on("mousemove", function(d){
+        tooltip
+        .style("left", d3.event.pageX - 50 + "px")
+        .style("top", d3.event.pageY - 70 + "px")
+        .style("display", "inline-block")
+        .html((d.area) + "<br>" + (d.value) + " votes");
+    })
+    .on("mouseout", function(d){ tooltip.style("display", "none");});
+</script>
+</html>
